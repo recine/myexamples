@@ -2,7 +2,8 @@ import sqlite3
 import pandas 
 import os
 import sys 
-conn = sqlite3.connect('example.db')
+# conn = sqlite3.connect('example.db')
+conn = sqlite3.connect(":memory:")
 c = conn.cursor()
 # line input 
 param_1= sys.argv[1] 
@@ -21,6 +22,9 @@ first_row = True
 # load into sqlite by this
 df = pandas.read_csv("C:\Users\P2731968\data lake\\all_24.csv")
 df.to_sql("holdallcol", conn, if_exists='replace', index=False)
+## use sqlight db to write a csv file
+# ddf = pandas.read_sql_query("select table_name from holdallcol", conn)
+# ddf.to_csv("C:\Users\P2731968\data lake\\tables.csv") 
 # index
 c.execute("update holdallcol set ind_num = rowid")
 conn.commit()
